@@ -20,8 +20,18 @@ export class UsersComponent {
     }
   ];
 
+
   onUserEnviar(ev: User): void {
 
-this.dataSource = [...this.dataSource, {...ev, id: new Date().getTime()}];
+    this.dataSource = [...this.dataSource, { ...ev, id: new Date().getTime() }];
+  }
+
+  editarUsuario(user: any) {
+      console.log('Editar Usuario');
+  }
+
+  eliminarUsuario(user: any) {
+    console.log('Eliminar usuario:');
   }
 }
+
