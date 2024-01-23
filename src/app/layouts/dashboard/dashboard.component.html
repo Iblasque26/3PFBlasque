@@ -1,11 +1,17 @@
 <mat-drawer-container class="dashboard-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
+    <p class="p-3">Academia Blasque</p>
     @if (showFiller) {
     <p>Lorem, ipsum dolor sit amet consectetur.</p>
     }
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
+    <button class="m-2 w-11 estilo" (click)="showFiller = !showFiller" mat-raised-button>
+      Cursos
+    </button>
+    <button class="m-2 w-11" (click)="showFiller = !showFiller" mat-raised-button>
+      Sedes
+    </button>
+    <button class="m-2 w-11" (click)="showFiller = !showFiller" mat-raised-button>
+      Profesores
     </button>
   </mat-drawer>
 
@@ -15,14 +21,12 @@
         (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>My App</span>
+      <span><p appSizeLetra>My App</p></span>
       <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
+      <span><p appSizeLetra class="p-3">Bienvenido a mi proyecto</p></span>
+      <span class="example-spacer"></span>
+      <span><p size="15px" appSizeLetra>Prueba Directiva con Args</p></span>
+      <span class="example-spacer"></span>
     </mat-toolbar>
     <div class="p-3">
       <app-users></app-users>
