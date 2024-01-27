@@ -17,7 +17,7 @@ export class FormUsuariosComponent {
   this.usuarioForm = this.fb.group({
     nombre: this.fb.control('', [Validators.required, Validators.minLength(2)]),
     apellido: this.fb.control('', [Validators.required, Validators.minLength(2)]),
-    mail: this.fb.control('', Validators.required),
+    mail: this.fb.control('', [Validators.required, Validators.email]),
     provincia: this.fb.control('', Validators.required),
     modoCursada: this.fb.control('', Validators.required),
   })

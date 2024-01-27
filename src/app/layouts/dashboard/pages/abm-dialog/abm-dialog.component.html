@@ -1,0 +1,31 @@
+<div mat-dialog-content>
+  <form [formGroup]="userForm">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" name="nombre">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="apellido" name="apellido">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="mail" name="mail">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Provincia</mat-label>
+      <input matInput formControlName="provincia" name="provincia">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Modo de cursada</mat-label>
+      <mat-select formControlName="modoCursada">
+        <mat-option value="Virtual">Virtual</mat-option>
+        <mat-option value="Presencial">Presencial</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="userForm.value" cdkFocusInitial (click)="onSave()">Guardar</button>
+</div>

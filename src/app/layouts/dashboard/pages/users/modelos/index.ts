@@ -5,5 +5,5 @@ export interface User {
     mail: string;
     provincia: string;
     modoCursada: string;
-    acciones: any;
+    acciones: string;
 }
