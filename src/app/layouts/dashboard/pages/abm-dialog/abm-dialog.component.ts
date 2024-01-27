@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '../users/modelos';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -11,6 +11,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AbmDialogComponent implements OnInit {
   userForm: FormGroup;
+  
+  cursadas: any[] = [
+    { value: 'Virtual', viewValue: 'Virtual' },
+    { value: 'Presencial', viewValue: 'Presencial' }
+  ];
 
   constructor(
     public dialogRef: MatDialogRef<AbmDialogComponent>,
