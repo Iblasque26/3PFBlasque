@@ -1,10 +1,9 @@
 export interface User {
-    id: number;
+    id?: number;
     nombre: string;
     apellido: string;
     mail: string;
     provincia: string;
-    modoCursada: string;
-    acciones: string;
+    curso: string[];
 }
 

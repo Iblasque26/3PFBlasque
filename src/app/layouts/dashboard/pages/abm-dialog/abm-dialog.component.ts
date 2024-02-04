@@ -1,51 +1,51 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../users/modelos';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
   selector: 'app-abm-dialog',
   templateUrl: './abm-dialog.component.html',
-  styleUrl: './abm-dialog.component.scss'
+  styleUrls: ['./abm-dialog.component.scss']
 })
-export class AbmDialogComponent implements OnInit {
+export class AbmDialogComponent {
   userForm: FormGroup;
-  
-  cursadas: any[] = [
-    { value: 'Virtual', viewValue: 'Virtual' },
-    { value: 'Presencial', viewValue: 'Presencial' }
-  ];
+  curso = ['Angular', 'Js', 'Html', 'React'];
 
   constructor(
-    public dialogRef: MatDialogRef<AbmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: User,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private matDialogRef: MatDialogRef<AbmDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public user?: User
   ) {
     this.userForm = this.fb.group({
-      nombre: this.fb.control('', [Validators.required, Validators.minLength(2)]),
-      apellido: this.fb.control('', [Validators.required, Validators.minLength(2)]),
-      mail: this.fb.control('', [Validators.required, Validators.email]),
-      provincia: this.fb.control('', Validators.required),
-      modoCursada: this.fb.control('', Validators.required),
+      nombre: [this.user?.nombre || '', Validators.required],
+      apellido: [this.user?.apellido || '', Validators.required],
+      mail: [this.user?.mail || '', [Validators.required, Validators.email]],
+      provincia: [this.user?.provincia || ''],
+      curso: [this.user?.curso || []],
     });
+  }
 
-    if (data) {
-      this.userForm.patchValue(data);
+  get cursoControl(): FormControl | null {
+    const control = this.userForm.get('curso');
+    return control instanceof FormControl ? control : null;
+  }
+
+  onSubmit(): void {
+    if (this.userForm.invalid) {
+      this.userForm.markAllAsTouched();
+    } else {
+      const formValue = this.userForm.value;
+      const newUser: User = {
+        nombre: formValue.nombre,
+        apellido: formValue.apellido,
+        mail: formValue.mail,
+        provincia: formValue.provincia,
+        curso: formValue.curso, // Asegúrate de que el campo "curso" tenga la estructura correcta
+      };
+  
+      this.matDialogRef.close(newUser);
     }
-  }
-
-  ngOnInit(): void {
-  }
-
-  onSave(): void {
-    if (this.userForm.valid) {
-      this.dialogRef.close(this.userForm.value);
-    }
-  }
-
-  onClose(): void {
-    this.dialogRef.close();
   }
 }
-

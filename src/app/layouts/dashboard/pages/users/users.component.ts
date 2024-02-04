@@ -10,7 +10,8 @@ import { DialogConfirmarComponent } from '../dialog-confirmar/dialog-confirmar.c
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-  displayedColumns: string[] = ['id', 'nombreCompleto', 'mail', 'provincia', 'modoCursada', 'acciones'];
+  cursos = ['Angular', 'Js', 'Html', 'React'];
+  displayedColumns: string[] = ['id', 'nombreCompleto', 'mail', 'provincia', 'curso', 'acciones'];
   dataSource: User[] = [
     {
       id: 1,
@@ -18,20 +19,30 @@ export class UsersComponent {
       apellido: 'Blasque',
       mail: 'igna@gmail.com',
       provincia: 'Cordoba',
-      modoCursada: 'Virtual',
-      acciones: 'Eliminar'
-    }
+      curso: ['Angular'],
+    },
   ];
 
   constructor(private matDialog: MatDialog) { }
-  ngOnInit(): void {
+
+  openUsersDialog(): void {
+    this.matDialog
+      .open(AbmDialogComponent)
+      .afterClosed()
+      .subscribe((v) => {
+        if (v) {
+          this.dataSource = [
+            ...this.dataSource,
+            {
+              ...v,
+              id: new Date().getTime(),
+            },
+          ];
+        }
+      });
   }
 
-  onUserEnviar(ev: User): void {
-    this.dataSource = [...this.dataSource, { ...ev, id: new Date().getTime() }];
-  }
-
-  abrirEditDialog(user: User): void {
+  onEditUser(user: User): void {
     this.matDialog
       .open(AbmDialogComponent, {
         data: user,
@@ -53,7 +64,7 @@ export class UsersComponent {
       width: '350px',
       data: user
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
         this.dataSource = this.dataSource.filter((u) => u.id !== user.id);
