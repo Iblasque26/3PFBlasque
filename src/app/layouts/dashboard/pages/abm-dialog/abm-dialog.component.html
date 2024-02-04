@@ -1,4 +1,5 @@
-<div mat-dialog-content>
+<h2 mat-dialog-title>Editar usuario</h2>
+<mat-dialog-content>
   <form [formGroup]="userForm">
     <mat-form-field>
       <mat-label>Nombre</mat-label>
@@ -25,7 +26,8 @@
       </mat-select>
     </mat-form-field>
   </form>
-</div>
+</mat-dialog-content>
+
 <div mat-dialog-actions>
   <button mat-button (click)="onClose()">Cancelar</button>
   <button mat-button [mat-dialog-close]="userForm.value" cdkFocusInitial (click)="onSave()">Guardar</button>
