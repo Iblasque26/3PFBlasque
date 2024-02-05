@@ -1,5 +1,5 @@
-<button mat-raised-button color="primary" (click)="openUsersDialog()">
-  <mat-icon>add</mat-icon> Nuevo Usuario
+<button mat-raised-button color="primary" (click)="openUsersDialog()" class="m-5">
+  <mat-icon>person_add</mat-icon> Nuevo Usuario
 </button>
 
 <mat-table [dataSource]="dataSource" matSort>
@@ -31,8 +31,8 @@
   <ng-container matColumnDef="acciones">
     <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
     <mat-cell *matCellDef="let user">
-      <button mat-raised-button color="primary" (click)="onEditUser(user)">Editar</button>
-      <button mat-raised-button color="warn" (click)="abrirElimDialog(user)">Eliminar</button>
+      <button class="p-1 m-2 w-10" mat-raised-button color="primary" (click)="onEditUser(user)"><mat-icon> border_color</mat-icon></button>
+      <button class="p-1 w-10" mat-raised-button color="warn" (click)="abrirElimDialog(user)"><mat-icon>delete</mat-icon></button>
     </mat-cell>
   </ng-container>
 

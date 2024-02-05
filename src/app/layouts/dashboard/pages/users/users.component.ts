@@ -3,6 +3,8 @@ import { User } from './modelos/index';
 import { MatDialog } from '@angular/material/dialog';
 import { AbmDialogComponent } from '../abm-dialog/abm-dialog.component';
 import { DialogConfirmarComponent } from '../dialog-confirmar/dialog-confirmar.component';
+import { UsersService } from '../../../../core/services/users.service';
+import { AlertsService } from '../../../../core/services/alerts.service';
 
 @Component({
   selector: 'app-users',
@@ -22,10 +24,15 @@ export class UsersComponent {
       curso: ['Angular'],
     },
   ];
+  isEditing = false;
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(
+    private matDialog: MatDialog,
+    private alertsService:  AlertsService
+    ) {}
 
   openUsersDialog(): void {
+    this.isEditing = false
     this.matDialog
       .open(AbmDialogComponent)
       .afterClosed()
@@ -38,11 +45,16 @@ export class UsersComponent {
               id: new Date().getTime(),
             },
           ];
+          if (!this.isEditing) {
+            this.alertsService.showCreado();
+          }
         }
       });
   }
+  
 
   onEditUser(user: User): void {
+    this.isEditing = true;
     this.matDialog
       .open(AbmDialogComponent, {
         data: user,
@@ -54,6 +66,9 @@ export class UsersComponent {
             this.dataSource = this.dataSource.map((u) =>
               u.id === user.id ? { ...u, ...v } : u
             );
+            if (this.isEditing) {
+              this.alertsService.showEditado();
+            }
           }
         },
       });
@@ -70,5 +85,7 @@ export class UsersComponent {
         this.dataSource = this.dataSource.filter((u) => u.id !== user.id);
       }
     });
+    
   }
+
 }

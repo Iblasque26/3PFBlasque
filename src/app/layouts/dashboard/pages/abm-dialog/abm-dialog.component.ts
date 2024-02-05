@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../users/modelos';
+import { AlertsService } from '../../../../core/services/alerts.service';
+
 
 
 @Component({
@@ -14,6 +16,7 @@ export class AbmDialogComponent {
   curso = ['Angular', 'Js', 'Html', 'React'];
 
   constructor(
+    private alertsService: AlertsService,
     private fb: FormBuilder,
     private matDialogRef: MatDialogRef<AbmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public user?: User
@@ -44,7 +47,6 @@ export class AbmDialogComponent {
         provincia: formValue.provincia,
         curso: formValue.curso, // Asegúrate de que el campo "curso" tenga la estructura correcta
       };
-  
       this.matDialogRef.close(newUser);
     }
   }

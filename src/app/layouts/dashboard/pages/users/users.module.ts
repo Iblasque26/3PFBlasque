@@ -9,7 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { SharedModule } from '../../../../shared/shared.module';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 
 @NgModule({
@@ -29,6 +30,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
   ],
   exports: [
     UsersComponent,
-  ]
+  ],
 })
 export class UsersModule { }
