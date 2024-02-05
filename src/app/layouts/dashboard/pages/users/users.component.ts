@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from './modelos/index';
 import { MatDialog } from '@angular/material/dialog';
 import { AbmDialogComponent } from '../abm-dialog/abm-dialog.component';
@@ -6,27 +6,21 @@ import { DialogConfirmarComponent } from '../dialog-confirmar/dialog-confirmar.c
 import { UsersService } from '../../../../core/services/users.service';
 import { AlertsService } from '../../../../core/services/alerts.service';
 
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit{
   cursos = ['Angular', 'Js', 'Html', 'React'];
   displayedColumns: string[] = ['id', 'nombreCompleto', 'mail', 'provincia', 'curso', 'acciones'];
-  dataSource: User[] = [
-    {
-      id: 1,
-      nombre: 'Ignacio',
-      apellido: 'Blasque',
-      mail: 'igna@gmail.com',
-      provincia: 'Cordoba',
-      curso: ['Angular'],
-    },
-  ];
-  isEditing = false;
+  dataSource: User[] = [];
 
+  isEditing = false;
   constructor(
+
+    private usersService: UsersService,
     private matDialog: MatDialog,
     private alertsService:  AlertsService
     ) {}
@@ -52,6 +46,13 @@ export class UsersComponent {
       });
   }
   
+  ngOnInit(): void {
+    this.usersService.getUsers().subscribe({
+      next: (users) => {
+        this.dataSource = users
+      }
+    })
+  }
 
   onEditUser(user: User): void {
     this.isEditing = true;
@@ -61,7 +62,7 @@ export class UsersComponent {
       })
       .afterClosed()
       .subscribe({
-        next: (v: User) => { // Define the type of v as User
+        next: (v: User) => { 
           if (!!v) {
             this.dataSource = this.dataSource.map((u) =>
               u.id === user.id ? { ...u, ...v } : u
