@@ -10,12 +10,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { SharedModule } from '../../../../shared/shared.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   declarations: [
     UsersComponent,
+    UserDetailComponent,
   ],
   imports: [
     CommonModule, MatTableModule,
@@ -26,7 +29,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule,
     MatIconModule,
     SharedModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterModule
   ],
   exports: [
     UsersComponent,

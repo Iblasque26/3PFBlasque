@@ -1,18 +1,21 @@
 <mat-drawer-container class="dashboard-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p class="p-3">Academia Blasque</p>
-    @if (showFiller) {
-    <p>Lorem, ipsum dolor sit amet consectetur.</p>
-    }
-    <button class="m-2 w-11 estilo" (click)="showFiller = !showFiller" mat-raised-button>
-      Cursos
-    </button>
-    <button class="m-2 w-11" (click)="showFiller = !showFiller" mat-raised-button>
-      Sedes
-    </button>
-    <button class="m-2 w-11" (click)="showFiller = !showFiller" mat-raised-button>
-      Profesores
-    </button>
+  <mat-drawer #drawer class="dashboard-sidebar" mode="side">
+    <mat-nav-list>
+      <a
+      #homeLink="routerLinkActive"
+       routerLinkActive
+       [activated]="homeLink.isActive"
+       routerLink="home" mat-list-item
+       >Inicio</a>
+      <a 
+       #usersLink="routerLinkActive"
+       routerLinkActive
+       [activated]="usersLink.isActive"
+       routerLink="users" 
+       mat-list-item
+      >Usuarios</a>
+      <a (click)="logout()" mat-list-item>Cerrar Sesion</a>
+    </mat-nav-list>
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -35,7 +38,8 @@
       <span class="example-spacer"></span>
     </mat-toolbar>
     <div class="p-3">
-      <app-users></app-users>
+      <!-- <app-users></app-users> -->
+      <router-outlet></router-outlet>
     </div>
   </div>
 

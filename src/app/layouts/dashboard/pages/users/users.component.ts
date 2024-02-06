@@ -5,6 +5,7 @@ import { AbmDialogComponent } from '../abm-dialog/abm-dialog.component';
 import { DialogConfirmarComponent } from '../dialog-confirmar/dialog-confirmar.component';
 import { UsersService } from '../../../../core/services/users.service';
 import { AlertsService } from '../../../../core/services/alerts.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class UsersComponent implements OnInit{
 
     private usersService: UsersService,
     private matDialog: MatDialog,
-    private alertsService:  AlertsService
+    private alertsService:  AlertsService,
     ) {}
 
   openUsersDialog(): void {

@@ -8,13 +8,15 @@ import {MatIconModule} from '@angular/material/icon';
 import { UsersModule } from './pages/users/users.module';
 import { SharedModule } from '../../shared/shared.module';
 import { MatFormField } from '@angular/material/form-field';
-
+import { RouterModule, RouterOutlet } from '@angular/router';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
     DashboardComponent,
   ],
   imports: [
+    RouterOutlet,
     CommonModule,
     MatSidenavModule,
     MatButtonModule,
@@ -24,6 +26,8 @@ import { MatFormField } from '@angular/material/form-field';
     SharedModule,
     MatFormField,
     MatButton,
+    RouterModule,
+    MatListModule
   ],
   exports: [
     DashboardComponent

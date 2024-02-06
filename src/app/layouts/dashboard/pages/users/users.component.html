@@ -31,8 +31,9 @@
   <ng-container matColumnDef="acciones">
     <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
     <mat-cell *matCellDef="let user">
-      <button class="p-1 m-2 w-10" mat-raised-button color="primary" (click)="onEditUser(user)"><mat-icon>border_color</mat-icon></button>
-      <button class="p-1 w-10" mat-raised-button color="warn" (click)="abrirElimDialog(user)"><mat-icon>delete</mat-icon></button>
+      <button [routerLink]="user.id" routerLinkActive="router-link-active"  class="p-1 m-2" mat-icon-button color="accent" ><mat-icon>visibility</mat-icon></button>
+      <button class="p-1 m-2 w-5" mat-raised-button color="primary" (click)="onEditUser(user)"><mat-icon>border_color</mat-icon></button>
+      <button class="p-1 m-2 w-5" mat-raised-button color="warn" (click)="abrirElimDialog(user)"><mat-icon>delete</mat-icon></button>
     </mat-cell>
   </ng-container>
 

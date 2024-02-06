@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../layouts/dashboard/pages/users/modelos';
-import { debounce, debounceTime, delay, of } from 'rxjs';
+import { Observable, debounce, debounceTime, delay, of } from 'rxjs';
 
 let USERS_DB: User[] = [
   {   
@@ -10,6 +10,14 @@ let USERS_DB: User[] = [
       mail: 'igna@gmail.com',
       provincia: 'Cordoba',
       curso: ['Angular'], 
+},
+{   
+  id: 2,
+  nombre: 'Luffy',
+  apellido: 'Monkey',
+  mail: 'nakama@gmail.com',
+  provincia: 'Dawn',
+  curso: ['Js'], 
 }
 ];
 
@@ -19,6 +27,10 @@ let USERS_DB: User[] = [
 export class UsersService {
 
   constructor() {}
+
+  getUserById(id: number | string): Observable<User | undefined> {
+    return of(USERS_DB.find((user) => user.id == id)).pipe(delay(1000));
+  }
 
   getUsers() {
     return of(USERS_DB).pipe(delay(1000))
