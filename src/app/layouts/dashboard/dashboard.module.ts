@@ -11,6 +11,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import {MatListModule} from '@angular/material/list';
 
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -27,7 +28,7 @@ import {MatListModule} from '@angular/material/list';
     MatFormField,
     MatButton,
     RouterModule,
-    MatListModule
+    MatListModule,
   ],
   exports: [
     DashboardComponent

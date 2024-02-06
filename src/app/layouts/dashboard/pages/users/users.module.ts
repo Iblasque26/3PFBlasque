@@ -12,6 +12,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { RouterModule } from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -30,7 +31,8 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     SharedModule,
     MatPaginatorModule,
-    RouterModule
+    RouterModule,
+    MatCardModule
   ],
   exports: [
     UsersComponent,

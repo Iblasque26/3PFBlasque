@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../../../../../core/services/users.service';
 import { User } from '../../modelos';
 
+
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
