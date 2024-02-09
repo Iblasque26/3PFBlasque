@@ -10,6 +10,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { MatFormField } from '@angular/material/form-field';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import {MatListModule} from '@angular/material/list';
+import { HomeComponent } from './pages/home/home.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserDetailComponent } from './pages/users/pages/user-detail/user-detail.component';
+import { CursosComponent } from './pages/cursos/cursos.component';
 
 
 @NgModule({
@@ -27,7 +31,28 @@ import {MatListModule} from '@angular/material/list';
     SharedModule,
     MatFormField,
     MatButton,
-    RouterModule,
+    RouterModule.forChild([
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+      },
+      {
+        path: 'users/:id',
+        component: UserDetailComponent,
+      },
+      {
+        path: 'cursos',
+        loadChildren: () => import('./pages/cursos/cursos.module').then((m) => m.CursosModule)
+      },
+      {
+        path: '**',
+        redirectTo: 'home'
+      }
+    ]),
     MatListModule,
   ],
   exports: [

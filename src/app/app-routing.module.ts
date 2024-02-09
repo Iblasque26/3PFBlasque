@@ -11,24 +11,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: 'users',
-        component: UsersComponent,
-      },
-      {
-        path: 'users/:id',
-        component: UserDetailComponent,
-      },
-      {
-        path: '**',
-        redirectTo: 'home'
-      }
-    ]
+    loadChildren: () =>
+    import('./layouts/dashboard/dashboard.module').then(
+      (m) => m.DashboardModule
+    ),
   },
   {
     path: 'auth/login',
@@ -40,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/404'
+    redirectTo: '/auth/login',
   }
 ];
 
