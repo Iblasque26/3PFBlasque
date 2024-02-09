@@ -22,16 +22,36 @@ export class CursosComponent {
       }
     })
   }
-
-  onCreate(): void {
-    this.dialog.open(CursoDialogComponent)
+  onEdit(curso: Curso) {
+    this.dialog.open(CursoDialogComponent, {
+      data:curso,
+    })
   }
 
+  onCreate(): void {
+  this.dialog
+    .open(CursoDialogComponent)
+    .afterClosed()
+    .subscribe({
+      next: (result) => {
+        if (result) {
+          this.cursosService.createCurso(result).subscribe({
+            next: (cursos) => (
+              this.cursos = cursos
+            ),
+          });
+        }
+      },
+    });
+}
+
   onDelete(id: number) {
-    this.cursosService.deleteCursoById(id).subscribe({
-      next: (cursos) => {
-        this.cursos = cursos;
-      }
-    })
+    if (confirm('Esta seguro?')) {
+      this.cursosService.deleteCursoById(id).subscribe({
+        next: (cursos) => {
+          this.cursos = cursos;
+        }
+      })
+    }
   }
 }

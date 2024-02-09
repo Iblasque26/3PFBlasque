@@ -37,7 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatPaginator,
     MatButtonModule,
     MatFormField,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

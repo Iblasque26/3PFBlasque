@@ -27,6 +27,11 @@ export class CursosService {
         return of(cursos).pipe(delay(1500));
     }
 
+    createCurso(data: Curso) {
+        cursos = [...cursos, { ...data, id: cursos.length+1}];
+        return this.getCursos();
+    }
+
     deleteCursoById(id: number) {
         cursos = cursos.filter((el) => el.id != id);;
         return this.getCursos();
