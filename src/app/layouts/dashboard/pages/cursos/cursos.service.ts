@@ -28,12 +28,17 @@ export class CursosService {
     }
 
     createCurso(data: Curso) {
-        cursos = [...cursos, { ...data, id: cursos.length+1}];
+        cursos = [...cursos, { ...data, id: cursos.length + 1}];
         return this.getCursos();
     }
 
     deleteCursoById(id: number) {
         cursos = cursos.filter((el) => el.id != id);;
+        return this.getCursos();
+    }
+
+    updateCursoById( id: number, data: Curso) {
+        cursos = cursos.map((el) => (el.id === id ? { ...el, ...data} : el));
         return this.getCursos();
     }
 }

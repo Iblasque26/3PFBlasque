@@ -25,7 +25,15 @@ export class CursosComponent {
   onEdit(curso: Curso) {
     this.dialog.open(CursoDialogComponent, {
       data:curso,
-    })
+    }).afterClosed().subscribe({
+      next: (cursos) => {
+        if (cursos) {
+          this.cursosService.updateCursoById(curso.id, cursos).subscribe({
+            next: (cursos) => (this.cursos = cursos),
+          });
+        }
+      },
+    });
   }
 
   onCreate(): void {

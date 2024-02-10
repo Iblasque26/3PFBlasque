@@ -21,6 +21,10 @@ export class CursoDialogComponent {
       name: this.fb.control(''),
       createdAt: this.fb.control(''),
     });
+
+    if (editingCurso) {
+      this.cursoForm.patchValue(editingCurso);
+    }
   }
 
   onSave(): void {
