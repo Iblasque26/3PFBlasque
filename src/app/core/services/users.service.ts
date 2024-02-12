@@ -10,6 +10,7 @@ let USERS_DB: User[] = [
       mail: 'igna@gmail.com',
       provincia: 'Cordoba',
       curso: ['Angular'], 
+      password: '',
 },
 {   
   id: 2,
@@ -18,6 +19,7 @@ let USERS_DB: User[] = [
   mail: 'nakama@gmail.com',
   provincia: 'Dawn',
   curso: ['Js'], 
+  password: '',
 }
 ];
 

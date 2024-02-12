@@ -14,6 +14,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { UsersComponent } from './pages/users/users.component';
 import { UserDetailComponent } from './pages/users/pages/user-detail/user-detail.component';
 import { CursosComponent } from './pages/cursos/cursos.component';
+import { authGuard } from '../../core/guards/auth.guard';
+import { AuthModule } from '../auth/auth.module';
 
 
 @NgModule({
@@ -38,7 +40,7 @@ import { CursosComponent } from './pages/cursos/cursos.component';
       },
       {
         path: 'users',
-        component: UsersComponent,
+        loadChildren: () => import('./pages/users/users.module').then((m) => m.UsersModule)
       },
       {
         path: 'users/:id',
@@ -54,6 +56,7 @@ import { CursosComponent } from './pages/cursos/cursos.component';
       }
     ]),
     MatListModule,
+    AuthModule
   ],
   exports: [
     DashboardComponent

@@ -19,6 +19,14 @@ showAlert(options: SweetAlertOptions): void {
     this.notifications$.next(options);
 }
 
+showError(message?: string): void {
+    this.notifications$.next({
+      icon: 'error',
+      title: 'Error!',
+      text: message,
+    });
+}
+
 showCreado(message?: string): void {
     this.notifications$.next({
         icon: 'success',

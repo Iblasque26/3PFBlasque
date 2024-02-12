@@ -5,5 +5,6 @@ export interface User {
     mail: string;
     provincia: string;
     curso: string[];
+    password: string;
 }
 

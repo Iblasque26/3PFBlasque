@@ -11,11 +11,14 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
+import { ValidationErrorsPipe } from './validation-errors.pipe';
 
 @NgModule({
   declarations: [
     NombreCompletoPipe,
-    SizeLetraDirective
+    SizeLetraDirective,
+    ValidationErrorsPipe
   ],
   imports: [
     CommonModule
@@ -31,7 +34,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCardModule,
+    ValidationErrorsPipe,
   ]
 })
 export class SharedModule { }

@@ -44,6 +44,7 @@ export class AbmDialogComponent {
         mail: formValue.mail,
         provincia: formValue.provincia,
         curso: formValue.curso, 
+        password: ''
       };
       this.matDialogRef.close(newUser);
     }
