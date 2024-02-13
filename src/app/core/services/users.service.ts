@@ -1,46 +1,45 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../layouts/dashboard/pages/users/modelos';
-import { Observable, debounce, debounceTime, delay, of } from 'rxjs';
+import { Observable, debounce, debounceTime, delay, of, mergeMap, catchError } from 'rxjs';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { enviroment } from '../../../enviroments/enviroments';
+import { AlertsService } from './alerts.service';
 
-let USERS_DB: User[] = [
-  {   
-      id: 1,
-      nombre: 'Ignacio',
-      apellido: 'Blasque',
-      mail: 'igna@gmail.com',
-      provincia: 'Cordoba',
-      curso: ['Angular'], 
-      password: '',
-},
-{   
-  id: 2,
-  nombre: 'Luffy',
-  apellido: 'Monkey',
-  mail: 'nakama@gmail.com',
-  provincia: 'Dawn',
-  curso: ['Js'], 
-  password: '',
-}
-];
+let USERS_DB: User[] = [];
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  constructor() {}
+  constructor(private httpClient: HttpClient, private alertsService: AlertsService) { }
 
   getUserById(id: number | string): Observable<User | undefined> {
-    return of(USERS_DB.find((user) => user.id == id)).pipe(delay(1000));
+    return this.httpClient.get<User>(`${enviroment.apiURL}/users/${id}`)
   }
 
   getUsers() {
-    return of(USERS_DB).pipe(delay(1000))
+    // let headers = new HttpHeaders();
+
+    // headers = headers.append('X-token', localStorage.getItem('token') || '');
+
+    return this.httpClient.get<User[]>(`${enviroment.apiURL}/users`, {
+      // headers: headers,
+    })
+      .pipe(delay(1000))
+      .pipe(catchError((error) => {
+        this.alertsService.showError('Error al cargar los usuario')
+        return of(error);
+      }))
+  }
+
+  createUser(payload: User) {
+    return this.httpClient.post<User>(`${enviroment.apiURL}/users`, payload).pipe(
+      mergeMap(() => this.getUsers()));
   }
 
   delUser(userID: number) {
-    USERS_DB = USERS_DB .filter((User) => User.id !== userID);
-    return this.getUsers();
+    return this.httpClient.delete<User>(`${enviroment.apiURL}/users/${userID}`)
   }
 
 }

@@ -15,6 +15,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule, MatSelectTrigger } from '@angular/material/select';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     MatFormField,
     MatSelectModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

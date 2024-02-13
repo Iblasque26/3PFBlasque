@@ -13,40 +13,40 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit{
+export class UsersComponent implements OnInit {
   cursos = ['Angular', 'Js', 'Html', 'React'];
   displayedColumns: string[] = ['id', 'nombreCompleto', 'mail', 'provincia', 'curso', 'acciones'];
   dataSource: User[] = [];
 
   isEditing = false;
   constructor(
-
     private usersService: UsersService,
     private matDialog: MatDialog,
-    private alertsService:  AlertsService,
-    ) {}
+    private alertsService: AlertsService,
+  ) { }
 
   openUsersDialog(): void {
-    this.isEditing = false
-    this.matDialog
-      .open(AbmDialogComponent)
-      .afterClosed()
-      .subscribe((v) => {
-        if (v) {
-          this.dataSource = [
-            ...this.dataSource,
-            {
-              ...v,
-              id: new Date().getTime(),
-            },
-          ];
-          if (!this.isEditing) {
-            this.alertsService.showCreado();
-          }
-        }
-      });
+    this.matDialog.open(AbmDialogComponent).afterClosed().subscribe((v: User) => {
+      if (v) {
+        const newUser: User = {
+          ...v,
+        };
+        this.usersService.createUser(newUser).subscribe(() => {
+          this.alertsService.showCreado();
+          this.refreshUsers();
+        });
+      }
+    });
   }
-  
+
+  refreshUsers(): void {
+    this.usersService.getUsers().subscribe({
+      next: (users) => {
+        this.dataSource = users;
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.usersService.getUsers().subscribe({
       next: (users) => {
@@ -63,7 +63,7 @@ export class UsersComponent implements OnInit{
       })
       .afterClosed()
       .subscribe({
-        next: (v: User) => { 
+        next: (v: User) => {
           if (!!v) {
             this.dataSource = this.dataSource.map((u) =>
               u.id === user.id ? { ...u, ...v } : u
@@ -81,13 +81,18 @@ export class UsersComponent implements OnInit{
       width: '350px',
       data: user
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
-        this.dataSource = this.dataSource.filter((u) => u.id !== user.id);
+        if (user.id !== undefined) { 
+          this.usersService.delUser(user.id).subscribe(() => {
+            this.refreshUsers();
+          });
+        } else {
+          console.error("El ID del usuario es undefined");
+        }
       }
     });
-    
   }
 
 }

@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "id": "6161",
+      "nombre": "Ignacio",
+      "apellido": "Blasque",
+      "mail": "ignabl@gmail.com",
+      "provincia": "Buenos Aires",
+      "curso": "Angular",
+      "password": ""
+    },
+    {
+      "id": "4291",
+      "nombre": "Luffy",
+      "apellido": "Monkey",
+      "mail": "nakama@gmail.com",
+      "provincia": "Dawn",
+      "curso": "Js",
+      "password": ""
+    }
+  ],
+  "courses": []
+}
