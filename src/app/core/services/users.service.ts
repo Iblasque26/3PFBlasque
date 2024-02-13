@@ -19,12 +19,7 @@ export class UsersService {
   }
 
   getUsers() {
-    // let headers = new HttpHeaders();
-
-    // headers = headers.append('X-token', localStorage.getItem('token') || '');
-
     return this.httpClient.get<User[]>(`${enviroment.apiURL}/users`, {
-      // headers: headers,
     })
       .pipe(delay(1000))
       .pipe(catchError((error) => {
