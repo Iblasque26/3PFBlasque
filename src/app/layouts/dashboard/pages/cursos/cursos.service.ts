@@ -2,28 +2,26 @@ import { Injectable } from "@angular/core";
 import { Curso } from "./models";
 import { delay, of } from "rxjs";
 
-let cursos: Curso[] = [
-    {
-        id: 1,
-        name: 'Angular',
-        createdAt: new Date(),
-    },
-    {
-        id: 2,
-        name: 'Js',
-        createdAt: new Date(),
-    },
-    {
-        id: 3,
-        name: 'React',
-        createdAt: new Date(),
-    },
-    {
-        id: 4,
-        name: 'Html',
-        createdAt: new Date(),
-    },
-];
+let cursos: Curso[] = [{
+    'id': 1,
+    'name': "Angular",
+    'createdAt': new Date()
+},
+{
+    'id': 2,
+    'name': "Js",
+    'createdAt': new Date()
+},
+{
+    'id': 3,
+    'name': "React",
+    'createdAt': new Date()
+},
+{
+    'id': 4,
+    'name': "Html",
+    'createdAt': new Date()
+}];
 
 @Injectable()
 export class CursosService {
